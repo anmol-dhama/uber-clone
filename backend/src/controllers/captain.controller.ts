@@ -9,7 +9,7 @@ interface AuthenticatedRequest extends Request {
   
 export const register = async (req: Request, res: Response): Promise<any> => {
     try {
-        const { fullName, email, password,status,vehicle,location } = req.body;
+        const { fullName, email, password,vehicle,location } = req.body;
 
         // Validate request data
         const validationErrors = validationOnCaptainRegister(req);
@@ -32,7 +32,7 @@ export const register = async (req: Request, res: Response): Promise<any> => {
             password: hashedPassword,
             fullName: { firstName: fullName.firstName, lastName: fullName.lastName }, // Corrected structure
             socketId: "",  // Set socketId if needed, otherwise remove it
-            status: status,
+            status: "active",
             vehicle: vehicle,
             location: location
         });

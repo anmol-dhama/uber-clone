@@ -26,10 +26,10 @@ const validationOnRegister = (req: Request): string[] => {
 };
 
 const validationOnCaptainRegister = (req: Request): string[]=>{
-  const { fullName, email, password, status, vehicle  } = req.body;
+  const { fullName, email, password, vehicle  } = req.body;
   const errors: string[] = [];
 
-  if (!fullName.firstName || !email || !password || !status || !vehicle.color || !vehicle.plate || !vehicle.capacity || !vehicle.vehicleType) {
+  if (!fullName.firstName || !email || !password || !vehicle.color || !vehicle.plate || !vehicle.capacity || !vehicle.vehicleType) {
     errors.push("Please provide all mandatory fields: first name, email, and password.");
   }
 
@@ -45,11 +45,7 @@ const validationOnCaptainRegister = (req: Request): string[]=>{
     errors.push("Password must be at least 8 characters long and contain a mix of uppercase, lowercase, numbers, and symbols.");
   }
   
-  if (status !== "active" && status !== "inactive") {
-    errors.push("Please enter a valid status: active or inactive");
-}
-
-  if(vehicle.vehicleType != "car" && vehicle.vehicleType != "bike" && vehicle.vehicleType != "auto"){
+  if(vehicle.vehicleType !== "car" && vehicle.vehicleType !== "bike" && vehicle.vehicleType !== "auto"){
     errors.push("Please enter a valid vehicle type!");
   }
 
