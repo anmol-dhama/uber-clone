@@ -22,9 +22,9 @@ interface ICaptain extends Document {
         vehicleType: string;
     };
     location: {
-        lat: Number;
-        long: Number;
-    }
+        type: 'Point';
+        coordinates: [number, number]; // [lng, ltd]
+    };
 
     //instance methods
     getJWT(): Promise<string>,
@@ -51,15 +51,18 @@ const captainSchema: Schema<ICaptain, ICaptainModel> = new Schema(
             color: {type: String, required: true},
             plate: {type: String, required: true},
             capacity: {type: String, required: true},
-            vehicleType: { type: String, required: true, enum:["car","bike","auto"]}
+            vehicleType: { type: String, required: true, enum:["car","motorcycle","auto"]}
         },
         location: {
-            lat:{type:Number},
-            long:{type:Number}
+            type: { type: String, default: 'Point' },  // GeoJSON type
+            coordinates: { type: [Number], required: true }  // [lng, ltd]
         }
     },
     { timestamps: true }
 );
+
+captainSchema.index({ location: '2dsphere' });
+
 
 // Static method for password hashing
 captainSchema.statics.hashPassword = async function (password: string): Promise<string> {

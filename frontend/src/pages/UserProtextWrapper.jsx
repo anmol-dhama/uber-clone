@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const UserProtectWrapper = ({ children }) => {
     const navigate = useNavigate();
-    const [user, setUser] = useContext(UserDataContext);
+    const [user, setUser] = React.useContext(UserDataContext);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {

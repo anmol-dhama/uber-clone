@@ -45,11 +45,51 @@ const validationOnCaptainRegister = (req: Request): string[]=>{
     errors.push("Password must be at least 8 characters long and contain a mix of uppercase, lowercase, numbers, and symbols.");
   }
   
-  if(vehicle.vehicleType !== "car" && vehicle.vehicleType !== "bike" && vehicle.vehicleType !== "auto"){
+  if(vehicle.vehicleType !== "car" && vehicle.vehicleType !== "motorcycle" && vehicle.vehicleType !== "auto"){
     errors.push("Please enter a valid vehicle type!");
   }
 
   return errors;
 }
 
-export { validationOnRegister, validationOnCaptainRegister };
+const validationOnRideCreate = (req: Request): string[] => {
+  const {pickup, destination, vehicleType  } = req.body;
+  const errors: string[] = [];
+
+  if (!pickup || !destination || !vehicleType) {
+    errors.push("Please provide all mandatory fields:  pickup,destination, and vehicleType.");
+  }
+  return errors;
+};
+
+const validationOnConfirmRide = (req: Request): string[] => {
+  const {rideId} = req.body;
+  const errors: string[] = [];
+
+  if (!rideId) {
+    errors.push("Please provide all mandatory fields: rideId");
+  }
+  return errors;
+};
+
+const validationOnStartRide = (req: Request): string[] => {
+  const {rideId,otp} = req.query;
+  const errors: string[] = [];
+
+  if (!rideId || !otp) {
+    errors.push("Please provide all mandatory fields: rideId and otp");
+  }
+  return errors;
+};
+
+const validationOnEndRide = (req: Request): string[] => {
+  const {rideId} = req.body;
+  const errors: string[] = [];
+
+  if (!rideId) {
+    errors.push("Please provide all mandatory fields: rideId");
+  }
+  return errors;
+};
+
+export { validationOnRegister, validationOnCaptainRegister, validationOnRideCreate,validationOnConfirmRide,validationOnStartRide,validationOnEndRide };

@@ -17,7 +17,7 @@ const CaptainProtectWrapper = ({ children }) => {
 
         const fetchCaptainProfile = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/captains/profile`, {
+                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/captains/getProfile`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },

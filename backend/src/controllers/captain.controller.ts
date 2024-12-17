@@ -34,7 +34,10 @@ export const register = async (req: Request, res: Response): Promise<any> => {
             socketId: "",  // Set socketId if needed, otherwise remove it
             status: "active",
             vehicle: vehicle,
-            location: location
+            location: {
+                type: "Point",  // GeoJSON type for points
+                coordinates: [location.lng, location.ltd]  // [longitude, latitude] (reverse the order)
+            }
         });
 
         const Gentoken = await captain.getJWT();

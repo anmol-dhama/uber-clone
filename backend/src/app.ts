@@ -7,6 +7,8 @@ import cors from 'cors';
 import connectToDb from './db/db';
 import userRoute from '../src/routes/user.route';
 import captainRoute from '../src/routes/captain.route';
+import mapRoute from '../src/routes/maps.route';
+import rideRoute from '../src/routes/ride.route';
 
 const app = express();
 
@@ -24,5 +26,7 @@ app.use(cors());
 
 app.use('/api/users', userRoute);
 app.use('/api/captains', captainRoute);
+app.use('/api/maps', mapRoute);
+app.use('/api/rides', rideRoute);
 
 export default app;
